@@ -1,18 +1,14 @@
 <?php
 require_once('db_connection.php');
+require_once('fullContent.php');
+
 
 session_start();
 
-// Функция для проверки аутентификации пользователя
-function checkAuthentication() {
-    if (isset($_SESSION['username'])) {
-        header("Location: user_dashboard.php"); // Перенаправление на личный кабинет
-        exit;
-    }
+if (isset($_SESSION['username'])) {
+    header("Location: user_dashboard.php");
+    exit;
 }
-
-// Проверка аутентификации при загрузке страницы
-checkAuthentication();
 
 // Проверка входа пользователя при отправке формы авторизации
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
@@ -45,9 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
 </head>
 <body>
 
-<?php
-require_once('fullContent.php');
-?>
+
 
 <div class="content">
     <h2>Личный кабинет</h2>
@@ -55,9 +49,7 @@ require_once('fullContent.php');
     <?php if (isset($_SESSION['username'])): ?>
         <p>Привет, <?php echo $_SESSION['username']; ?>!</p>
         <p>Статус аккаунта: <?php echo $_SESSION['role']; ?></p>
-        <!-- Добавьте остальное содержимое личного кабинета здесь -->
     <?php else: ?>
-        <!-- Форма авторизации -->
         <form method="post" action="">
             <h3>Авторизация</h3>
             <label for="login-username">Логин:</label>
@@ -69,7 +61,8 @@ require_once('fullContent.php');
             <input type="submit" name="login" value="Войти">
         </form>
         <br>
-        <p>У вас нет аккаунта? <a href="register.php">Зарегистрируйтесь!</a></p>
+        <p>У вас нет аккаунта? <a href="register.php">Зарегистрируйтесь!</a></p>     
+        <p>Забыли пароль? <a href="forgot_password.php">Восстановить!</a></p>
         <?php if (isset($errorMessage)): ?>
             <p class='error'><?php echo $errorMessage; ?></p>
         <?php endif; ?>

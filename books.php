@@ -64,7 +64,6 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
     <h2>Список книг</h2>
 
     <?php if ($_SESSION['role'] === 'reader'): ?>
-        <!-- Личный кабинет читателя -->
         <form method="post" action="">
             <table>
                 <tr>
@@ -99,7 +98,6 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
             </table>
         </form>
     <?php elseif ($_SESSION['role'] === 'admin'): ?>
-        <!-- Личный кабинет администратора -->
         <table>
             <tr>
                 <th>Номер</th>

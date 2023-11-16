@@ -1,5 +1,7 @@
 <?php
 require_once('db_connection.php');
+require_once('fullContent.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
     $username = $_POST["username"];
@@ -47,9 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
 </head>
 <body>
 
-<?php
-require_once('fullContent.php');
-?>
+
 
 <div class="content">
     <h2>Регистрация</h2>
@@ -61,7 +61,6 @@ require_once('fullContent.php');
     <label for="register-password">Пароль:</label>
     <input type="password" id="register-password" name="password" required><br>
     <br>
-    <!-- Добавлено поле выбора роли -->
     <label for="user-role">Роль:</label>
     <select id="user-role" name="role" required>
         <option value="reader">Читатель</option>
@@ -74,6 +73,10 @@ require_once('fullContent.php');
     <input type="text" id="last-name" name="last_name" required><br>
     <br>
     <input type="submit" name="register" value="Зарегистрироваться">
+</form>
+<br>
+<form method="post" action="logout.php">
+    <input type="submit" name="logout" value="Вернуться на страницу входа">
 </form>
     <?php
     if (isset($errorMessage)) {
